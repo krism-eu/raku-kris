@@ -24,5 +24,5 @@ Current=breeze
 EOF
 fi
 
-dnf5 clean all
-rm -rf /var/cache/dnf
+# Pulizia fisica delle cache (evita invocazione shim dopo rum-dnf-shim)
+rm -rf /var/cache/dnf /var/cache/rum /var/lib/dnf /tmp/* /var/tmp/*
