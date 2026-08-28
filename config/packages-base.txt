@@ -1,0 +1,2 @@
+# Fedora build-time/runtime prerequisites only.
+dnf5
