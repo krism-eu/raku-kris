@@ -1,0 +1,15 @@
+# Desktop tools richiesti
+ark
+okular
+podman
+# Flatpak e utilità°°
+flatpak
+flatpak-session-helper
+flatpak-spawn
+flatpak-kcm
+flatpak-libs
+appstream
+appstream-data
+appstream-qt
+PackageKit-Qt6
+plasma-systemsettings

@@ -1,0 +1,13 @@
+# RakuOS runtime — solo RPM RakuOS reali
+rakuos-release
+rakuos-release-kde
+rakuos-core
+rakuos-rum
+rakuos-settings
+# Kernel P03
+kernel-p03-v2
+kernel-p03-v2-core
+kernel-p03-v2-modules
+akmods
+# Shim DNF (MUST BE LAST to not break dnf5 during transaction)
+rum-dnf-shim
