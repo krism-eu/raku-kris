@@ -1,0 +1,48 @@
+name: Build and Publish Raku Kris
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install buildah
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y buildah
+
+      - name: Build container image
+        run: |
+          buildah bud -f Containerfile -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
+            --build-arg FEDORA_VERSION=44 .
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push container image
+        run: |
+          buildah push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+      - name: Generate image manifest
+        run: |
+          echo "Image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
+          echo "To rebase: sudo bootc switch --transport container ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
