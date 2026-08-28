@@ -1,0 +1,20 @@
+# Local build outputs
+output/
+artifacts/
+*.iso
+*.qcow2
+*.raw
+*.tar
+
+# Container/build caches
+.cache/
+containers-storage/
+
+# Editor files
+.vscode/
+.idea/
+*~
+
+# Logs and environment
+*.log
+.env
