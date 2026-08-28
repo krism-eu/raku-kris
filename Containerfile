@@ -37,6 +37,9 @@ RUN /usr/lib/raku-kris/build/20-kde.sh \
 RUN /usr/lib/raku-kris/build/30-raku-desktop.sh \
     && /usr/lib/raku-kris/tests/test-raku-desktop.sh
 
+# Phase 3.5: Fix PAM config per plasmalogin (NEW!)
+RUN /usr/lib/raku-kris/build/35-fix-pam.sh
+
 # Phase 4: Cleanup
 RUN /usr/lib/raku-kris/build/40-cleanup.sh
 
