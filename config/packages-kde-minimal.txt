@@ -1,4 +1,4 @@
-# Core Plasma desktop
+# Core Plasma desktop (Plasma 6)
 plasma-desktop
 plasma-workspace
 plasma-workspace-common
@@ -10,16 +10,15 @@ plasma-browser-integration
 plasma-activities
 plasma-activities-stats
 plasma-integration
-plasma-integration-qt5
 plasma-keyboard
 plasma-login-manager
 plasma-lookandfeel-fedora
 plasma-milou
 plasma-breeze
 plasma-breeze-common
-plasma-breeze-qt5
 plasma-breeze-qt6
 plasma5support
+kdeplasma-addons
 
 # KWin
 kwin
@@ -43,6 +42,7 @@ kate
 kate-libs
 kate-plugins
 kwrited
+kdialog
 
 # Audio (PipeWire)
 pipewire
@@ -53,84 +53,30 @@ pipewire-jack-audio-connection-kit-libs
 wireplumber
 wireplumber-libs
 phonon-qt6
+phonon-qt6-vlc
 phonon-common
+phonon-backend-vlc-common
 
-# KDE Frameworks 6
-kf6-attica
-kf6-baloo
-kf6-baloo-libs
-kf6-bluez-qt
-kf6-frameworkintegration
-kf6-frameworkintegration-libs
-kf6-karchive
-kf6-kauth
-kf6-kbookmarks
-kf6-kcalendarcore
+# KDE Frameworks 6 (Solo pacchetti funzionali, non le singole librerie)
 kf6-kcmutils
-kf6-kcodecs
-kf6-kcolorscheme
-kf6-kcompletion
-kf6-kconfig
-kf6-kconfigwidgets
-kf6-kcontacts
-kf6-kcoreaddons
-kf6-kcrash
-kf6-kdbusaddons
-kf6-kdeclarative
-kf6-kded
-kf6-kdesu
-kf6-kdnssd
-kf6-kdoctools
-kf6-kfilemetadata
-kf6-kglobalaccel
-kf6-kguiaddons
-kf6-kholidays
-kf6-ki18n
-kf6-kiconthemes
-kf6-kidletime
-kf6-kidletime-x11
-kf6-kimageformats
-kf6-kio-core
-kf6-kio-core-libs
-kf6-kio-file-widgets
-kf6-kio-gui
-kf6-kio-widgets
-kf6-kio-widgets-libs
 kf6-kirigami
 kf6-kirigami-addons
-kf6-kitemmodels
-kf6-kitemviews
-kf6-kjobwidgets
-kf6-knewstuff
-kf6-knotifications
-kf6-knotifyconfig
-kf6-kpackage
-kf6-kparts
-kf6-kpty
+kf6-frameworkintegration
+kf6-kfilemetadata
+kf6-kglobalaccel
+kf6-kio-widgets
 kf6-kquickcharts
 kf6-krunner
-kf6-kservice
-kf6-kstatusnotifieritem
 kf6-ksvg
 kf6-ktexteditor
-kf6-ktextwidgets
-kf6-kunitconversion
 kf6-kuserfeedback
 kf6-kwallet
-kf6-kwallet-libs
-kf6-kwidgetsaddons
 kf6-kwindowsystem
-kf6-kxmlgui
-kf6-modemmanager-qt
-kf6-prison
-kf6-purpose
-kf6-qqc2-desktop-style
+kf6-networkmanager-qt
+kf6-bluez-qt
 kf6-solid
-kf6-sonnet
-kf6-sonnet-hunspell
-kf6-syndication
 kf6-syntax-highlighting
-kf6-threadweaver
+kf6-purpose
 
 # Network / Bluetooth
 bluedevil
@@ -138,11 +84,10 @@ bluez
 bluez-cups
 bluez-libs
 bluez-obexd
-kf6-networkmanager-qt
+kde-connect
 
 # System integration
 polkit-kde
-polkit-qt5-1
 polkit-qt6-1
 kde-cli-tools
 kde-gtk-config
@@ -154,33 +99,28 @@ kdesu
 kde-inotify-survey
 keditbookmarks
 keditbookmarks-libs
+plasma-firewall
 
 # Input method (ibus)
 ibus
-ibus-gtk2
 ibus-gtk3
 ibus-gtk4
 ibus-libs
 ibus-panel
 ibus-setup
 
-# Printing
+# Printing / Scanner
 cups
 cups-browsed
 cups-client
 cups-filters
 cups-filters-driverless
 cups-libs
-system-config-printer-libs
-system-config-printer-udev
-
-# Scanner
+print-manager
 sane-backends
-sane-backends-drivers-scanners
 sane-backends-libs
 sane-airscan
 libsane-airscan
-libsane-hpaio
 
 # Power / display
 powerdevil
@@ -199,17 +139,17 @@ libksysguard-common
 libkworkspace6
 libplasma
 
-# Themes
+# Themes / Boot
 breeze-cursor-theme
 breeze-gtk
 breeze-gtk-common
-breeze-gtk-gtk2
 breeze-gtk-gtk3
 breeze-gtk-gtk4
 breeze-icon-theme
 kf6-breeze-icons
 qqc2-breeze-style
 ocean-sound-theme
+breeze-plymouth
 
 # Misc desktop utilities
 spectacle
@@ -220,8 +160,6 @@ gwenview-libs
 okular
 okular-libs
 okular-part
-audiocd-kio
-audiocd-kio-doc
 ffmpegthumbs
 kcalc
 kcolorpicker-qt6
@@ -234,19 +172,14 @@ kactivitymanagerd
 knighttime
 kdotool
 
-# Portal / integration
+# Portal / integration / Base directories
 xdg-desktop-portal-kde
+xdg-user-dirs
 
 # Accounts / signon
 kaccounts-integration-qt6
 kaccounts-providers
 signon-kwallet-extension
-
-# PulseAudio Qt bindings
-pulseaudio-qt-qt6
-pulseaudio-libs
-pulseaudio-libs-glib2
-pulseaudio-utils
 
 # KCM modules
 kcm-plasma-keyboard
