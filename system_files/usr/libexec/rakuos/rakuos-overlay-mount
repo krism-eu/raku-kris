@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+# Mount the persistent overlay filesystem
+# This is called by the systemd service at boot
+#
+# IMPORTANT: On bootc-based systems, the overlay mechanism may vary:
+# - Option 1: Dedicated partition (e.g., /dev/disk/by-label/rakuos-overlay)
+# - Option 2: tmpfs overlay for development/testing
+# - Option 3: composefs or ostree native overlay
+#
+# This script implements Option 2 (tmpfs) as the default for bootc compatibility.
+# For production, replace with Option 1 or 3.
+
+OVERLAY_MOUNT="/var/rakuos-overlay"
+
+echo "Mounting RakuOS overlay..."
+
+# Check if already mounted
+if mountpoint -q "$OVERLAY_MOUNT" 2>/dev/null; then
+    echo "Overlay already mounted at $OVERLAY_MOUNT"
+    exit 0
+fi
+
+# Create mount point
+mkdir -p "$OVERLAY_MOUNT"
+
+# STRATEGY: tmpfs overlay for bootc compatibility
+# This avoids the need for a dedicated partition while maintaining the overlay model.
+# For production with persistent storage, replace with:
+#   mount -t tmpfs -o size=2G,mode=0755 tmpfs "$OVERLAY_MOUNT"
+
+if mount -t tmpfs -o size=2G,mode=0755 tmpfs "$OVERLAY_MOUNT"; then
+    echo "Overlay mounted as tmpfs at $OVERLAY_MOUNT"
+    
+    # Initialize overlay structure
+    mkdir -p "$OVERLAY_MOUNT/usr"
+    mkdir -p "$OVERLAY_MOUNT/var/lib/rpm"
+    mkdir -p "$OVERLAY_MOUNT/var/cache/dnf"
+    
+    # Create state tracking file
+    echo "$(date -Iseconds)" > "$OVERLAY_MOUNT/.rakuos-overlay-mounted"
+    
+    exit 0
+else
+    echo "ERROR: Failed to mount overlay" >&2
+    
+    # Fallback: try to use existing directory without mount
+    if [[ -d "$OVERLAY_MOUNT" ]]; then
+        echo "WARNING: Using existing directory without mount (non-persistent)"
+        exit 0
+    fi
+    
+    exit 1
+fi

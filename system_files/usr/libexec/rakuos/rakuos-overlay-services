@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+# Start overlay-related services
+# This is called by systemd after the overlay is mounted
+
+echo "Starting overlay services..."
+
+# Ensure overlay is synced
+if [[ -x /usr/libexec/rakuos/rakuos-overlay-sync ]]; then
+    /usr/libexec/rakuos/rakuos-overlay-sync
+fi
+
+# Start any overlay-dependent services
+# These would be services that need the overlay to be ready
+
+# Example: start package database sync
+# systemctl --user start rakuos-package-sync.service 2>/dev/null || true
+
+echo "Overlay services started"

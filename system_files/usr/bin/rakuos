@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+export LC_ALL=C
+
+# Raku Kris CLI - dispatcher for overlay management commands
+# This is the user-facing interface for package management on bootc-based systems.
+
+show_usage() {
+    cat << 'USAGE'
+Usage: rakuos <command> [options]
+
+Available commands:
+  install <package>   - Install a package into the persistent overlay
+  remove <package>    - Remove a package from the persistent overlay
+  list                - List packages installed in the persistent overlay
+  update              - Update the base image via bootc
+  reset-overlay       - Reset the persistent overlay to factory state
+  status              - Show overlay and base image status
+
+For more information, see the Raku Kris documentation.
+USAGE
+}
+
+if [[ $# -eq 0 ]]; then
+    show_usage
+    exit 1
+fi
+
+# Verify dnf5.real is available before dispatching package commands
+verify_backend() {
+    if ! command -v dnf5.real >/dev/null 2>&1; then
+        echo "ERROR: RakuOS backend (dnf5.real) not available." >&2
+        echo "This system may not have the Raku runtime fully initialized." >&2
+        exit 1
+    fi
+}
+
+case "$1" in
+    install)
+        shift
+        verify_backend
+        exec /usr/libexec/rakuos/rakuos-install "$@"
+        ;;
+    remove)
+        shift
+        verify_backend
+        exec /usr/libexec/rakuos/rakuos-remove "$@"
+        ;;
+    list)
+        verify_backend
+        exec /usr/libexec/rakuos/rakuos-list
+        ;;
+    update)
+        exec /usr/libexec/rakuos/rakuos-update
+        ;;
+    reset-overlay)
+        exec /usr/libexec/rakuos/rakuos-reset-overlay
+        ;;
+    status)
+        exec /usr/libexec/rakuos/rakuos-status
+        ;;
+    help|--help|-h)
+        show_usage
+        ;;
+    *)
+        echo "ERROR: Unknown command: $1" >&2
+        echo "Run 'rakuos --help' for usage." >&2
+        exit 1
+        ;;
+esac
