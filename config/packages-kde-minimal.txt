@@ -53,9 +53,8 @@ pipewire-jack-audio-connection-kit-libs
 wireplumber
 wireplumber-libs
 phonon-qt6
-phonon-qt6-vlc
 phonon-common
-phonon-backend-vlc-common
+
 
 # KDE Frameworks 6 (Solo pacchetti funzionali, non le singole librerie)
 kf6-kcmutils
@@ -116,7 +115,7 @@ cups-client
 cups-filters
 cups-filters-driverless
 cups-libs
-print-manager
+kde-print-manager
 sane-backends
 sane-backends-libs
 sane-airscan
