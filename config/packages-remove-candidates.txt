@@ -1,0 +1,6 @@
+# Packages to remove from Fedora bootc Minimal base
+# ALL LINES MUST REMAIN COMMENTED UNTIL AUDITED
+
+# gnome-games
+# glibc.i686
+# libstdc++.i686

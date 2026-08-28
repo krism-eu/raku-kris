@@ -53,9 +53,7 @@ pipewire-jack-audio-connection-kit-libs
 wireplumber
 wireplumber-libs
 phonon-qt6
-phonon-qt6-vlc
 phonon-common
-phonon-backend-vlc-common
 
 # KDE Frameworks 6
 kf6-attica

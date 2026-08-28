@@ -1,4 +1,4 @@
-# Raku Kris — fourth attempt
+# Raku Kris — third attempt
 # Fedora bootc base → RakuOS runtime repo → KDE → RakuOS RPMs → cleanup/validation.
 
 ARG FEDORA_VERSION=44
@@ -21,6 +21,9 @@ RUN chmod 0755 /usr/lib/raku-kris/build/*.sh /usr/lib/raku-kris/tests/*.sh
 # Phase 0: Fedora bootc Minimal base
 RUN /usr/lib/raku-kris/build/00-base-fedora.sh \
     && /usr/lib/raku-kris/tests/test-base.sh
+
+# Phase 0.5: Disable unnecessary repositories
+RUN /usr/lib/raku-kris/build/05-disable-repos.sh
 
 # Phase 1: Setup RakuOS repository
 RUN /usr/lib/raku-kris/build/10-raku-runtime.sh \
