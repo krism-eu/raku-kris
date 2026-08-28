@@ -1,13 +1,11 @@
 # RakuOS runtime — solo RPM RakuOS reali
+# ATTENZIONE: NON includere kernel o akmods qui.
+# Il kernel deve essere nella base image bootc.
+
 rakuos-release
 rakuos-release-kde
 rakuos-core
 rakuos-rum
 rakuos-settings
-# Kernel P03
-kernel-p03-v2
-kernel-p03-v2-core
-kernel-p03-v2-modules
-akmods
-# Shim DNF (MUST BE LAST to not break dnf5 during transaction)
+# Shim DNF (installato in unica transazione con desktop)
 rum-dnf-shim

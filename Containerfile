@@ -1,9 +1,7 @@
-# Raku Kris — third attempt
-# Stage order is intentional:
-# Fedora bootc base → RakuOS runtime → KDE → RakuOS desktop → cleanup/validation.
-# Do not call dnf5.real before 10-raku-runtime.sh provides and validates it.
+# Raku Kris — fourth attempt
+# Fedora bootc base → RakuOS runtime repo → KDE → RakuOS RPMs → cleanup/validation.
 
-ARG FEDORA_VERSION=44
+ARG FEDORA_VERSION=41
 FROM quay.io/bootc-devel/fedora-bootc-${FEDORA_VERSION}-minimal
 
 LABEL containers.bootc=1 \
@@ -20,25 +18,25 @@ COPY tests/ /usr/lib/raku-kris/tests/
 
 RUN chmod 0755 /usr/lib/raku-kris/build/*.sh /usr/lib/raku-kris/tests/*.sh
 
-# Phase 0: Prove that the Fedora bootc Minimal input remains a valid bootable image.
+# Phase 0: Fedora bootc Minimal base
 RUN /usr/lib/raku-kris/build/00-base-fedora.sh \
     && /usr/lib/raku-kris/tests/test-base.sh
 
-# Phase 1: Install RakuOS runtime and establish dnf5.real before any Raku wrapper is used.
+# Phase 1: Setup RakuOS repository
 RUN /usr/lib/raku-kris/build/10-raku-runtime.sh \
     && /usr/lib/raku-kris/tests/test-raku-runtime.sh
 
-# Phase 2: Install only the KDE session and required desktop plumbing.
+# Phase 2: Install KDE session using Fedora's native dnf5
 RUN /usr/lib/raku-kris/build/20-kde.sh \
     && /usr/lib/raku-kris/tests/test-kde.sh
 
-# Phase 3: Install RakuOS-facing desktop tools only after backend and KDE are available.
+# Phase 3: Install RakuOS RPMs (rum-dnf-shim, rakuos-core) and desktop tools
 RUN /usr/lib/raku-kris/build/30-raku-desktop.sh \
     && /usr/lib/raku-kris/tests/test-raku-desktop.sh
 
-# Phase 4: Cleanup is intentionally last; it must never hide dependency or install errors.
+# Phase 4: Cleanup
 RUN /usr/lib/raku-kris/build/40-cleanup.sh
 
-# Phase 5: Static validation before lint.
+# Phase 5: Static validation before lint
 RUN /usr/lib/raku-kris/build/90-validate.sh \
     && bootc container lint

@@ -2,10 +2,10 @@
 set -Eeuo pipefail
 source /usr/lib/raku-kris/build/lib.sh
 
-log_info "Installing RakuOS runtime RPMs"
+log_info "Installing RakuOS runtime and desktop RPMs"
+# UNICA transazione: dnf5 Fedora originale installa tutto,
+# incluso rum-dnf-shim, senza rischi di shim attivo a metà.
 install_from_list /usr/lib/raku-kris/config/packages-raku-runtime.txt
-
-log_info "Installing RakuOS desktop RPMs"
 install_from_list /usr/lib/raku-kris/config/packages-raku-desktop.txt
 
 log_info "Configuring desktop defaults"
@@ -24,5 +24,5 @@ Current=breeze
 EOF
 fi
 
-# Pulizia fisica delle cache (evita invocazione shim dopo rum-dnf-shim)
-rm -rf /var/cache/dnf /var/cache/rum /var/lib/dnf /tmp/* /var/tmp/*
+# NON usare dnf5 qui: potrebbe essere diventato lo shim.
+rm -rf /var/cache/dnf /var/cache/rum /tmp/* /var/tmp/*
