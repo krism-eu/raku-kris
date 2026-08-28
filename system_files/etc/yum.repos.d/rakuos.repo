@@ -1,9 +1,7 @@
 [rakuos]
-name=RakuOS Development Repository
-baseurl=https://rakuos.krisv.com/repos/rakuos
+name=Rakuos Repository
+baseurl=https://repo.rakuos.org/rakuos/$releasever/
 enabled=1
-gpgcheck=0
-# WARNING: gpgcheck=0 is for DEVELOPMENT ONLY.
-# Production builds MUST enable GPG verification with gpgcheck=1 and gpgkey=...
-# See README.md section "Important trust distinction".
+gpgcheck=1
+gpgkey=https://repo.rakuos.org/pubkey.gpg
 skip_if_unavailable=True
