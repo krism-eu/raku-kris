@@ -1,7 +1,7 @@
 # Raku Kris — fourth attempt
 # Fedora bootc base → RakuOS runtime repo → KDE → RakuOS RPMs → cleanup/validation.
 
-ARG FEDORA_VERSION=41
+ARG FEDORA_VERSION=44
 FROM quay.io/bootc-devel/fedora-bootc-${FEDORA_VERSION}-minimal
 
 LABEL containers.bootc=1 \
