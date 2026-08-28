@@ -37,6 +37,8 @@ RUN /usr/lib/raku-kris/build/30-raku-desktop.sh \
     && /usr/lib/raku-kris/tests/test-raku-desktop.sh
 
 # Phase 4: Cleanup is intentionally last; it must never hide dependency or install errors.
-RUN /usr/lib/raku-kris/build/40-cleanup.sh \
-    && /usr/lib/raku-kris/build/90-validate.sh \
+RUN /usr/lib/raku-kris/build/40-cleanup.sh
+
+# Phase 5: Static validation before lint.
+RUN /usr/lib/raku-kris/build/90-validate.sh \
     && bootc container lint

@@ -11,5 +11,8 @@ RemainAfterExit=yes
 StandardOutput=journal
 StandardError=journal
 
+# TODO: Implement real overlay service initialization
+# Current implementation is a scaffold placeholder.
+
 [Install]
 WantedBy=multi-user.target

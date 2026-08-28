@@ -13,5 +13,9 @@ RemainAfterExit=yes
 StandardOutput=journal
 StandardError=journal
 
+# IMPORTANT: This service is a scaffold implementation.
+# Production builds should use a real overlay mechanism (partition, composefs, or ostree native).
+# Current implementation uses tmpfs for development/testing compatibility.
+
 [Install]
 WantedBy=local-fs.target

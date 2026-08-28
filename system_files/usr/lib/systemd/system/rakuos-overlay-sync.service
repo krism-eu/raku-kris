@@ -10,5 +10,8 @@ ExecStart=/usr/libexec/rakuos/rakuos-overlay-sync
 StandardOutput=journal
 StandardError=journal
 
+# TODO: Implement real overlay sync logic
+# Current implementation is a scaffold placeholder.
+
 [Install]
 WantedBy=multi-user.target
