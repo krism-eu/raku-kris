@@ -18,5 +18,5 @@ fi
 # 3. Disabilita SELinux (per test)
 sed -i 's/^SELINUX=enforcing/SELINUX=permissive/' /etc/selinux/config
 
-# 4. Authselect
-authselect select sssd with-mkhomedir with-pammodules --force
+# 4. Authselect (Sintassi corretta per Fedora 44, senza with-pammodules)
+authselect select sssd with-mkhomedir --force || true
