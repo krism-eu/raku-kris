@@ -8,15 +8,13 @@ install_from_list /usr/lib/raku-kris/config/packages-kde-minimal.txt
 # Installa dipendenze critiche per il login grafico (usando il vero dnf5 di Fedora)
 dnf5 install -y pam-kwallet kf6-kwallet mesa-dri-drivers mesa-va-drivers mesa-vulkan-drivers linux-firmware
 
-# Abilita il display manager (plasma-login, con fallback a sddm)
+# Abilita il display manager (plasmalogin.service è lo standard RakuOS)
 log_info "Enabling display manager"
 mkdir -p /etc/systemd/system
-if [[ -f /usr/lib/systemd/system/plasma-login.service ]]; then
-    ln -sf /usr/lib/systemd/system/plasma-login.service /etc/systemd/system/display-manager.service
-elif [[ -f /usr/lib/systemd/system/sddm.service ]]; then
-    ln -sf /usr/lib/systemd/system/sddm.service /etc/systemd/system/display-manager.service
+if [[ -f /usr/lib/systemd/system/plasmalogin.service ]]; then
+    ln -sf /usr/lib/systemd/system/plasmalogin.service /etc/systemd/system/display-manager.service
 else
-    log_error "No display manager service found (plasma-login or sddm)"
+    log_error "plasmalogin.service not found! Impossibile abilitare il login grafico."
     exit 1
 fi
 
